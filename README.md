@@ -1,4 +1,4 @@
-# PHP Slim + Eloquent + Latte Boilderplate
+# PHP Slim + Eloquent + Latte Boilerplate
 
 If you don't want the headache of creating your own php application with slim, here's a ready-made boilerplate to get you all set up.
 
