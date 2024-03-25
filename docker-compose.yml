@@ -1,17 +1,7 @@
-version: "3"
+version: '3'
 
 services:
-  phpfpm:
-    container_name: phpfpm
-    build:
-      context: ./docker/php
-    ports:
-      - '9000:9000'
-    volumes:
-      - ./src:/var/www/html
-
   app:
-    container_name: app
     image: nginx:stable-alpine
     ports:
       - '8080:80'
@@ -21,8 +11,15 @@ services:
     depends_on:
       - phpfpm
 
+  phpfpm:
+    build:
+      context: ./docker/php
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./src:/var/www/html
+
   db:
-    container_name: db
     image: postgres:latest
     ports:
       - '15432:5432'
