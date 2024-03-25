@@ -3,6 +3,20 @@
 if docker compose version > /dev/null 2>&1; then
   DOCKER_COMPOSE="docker compose"
 else
-  # shellcheck disable=SC2034
   DOCKER_COMPOSE="docker-compose"
 fi
+
+COMPOSE_FILES=("docker-compose.yml")
+
+if [ "$1" == "--no-dev" ]; then
+  shift 1
+else
+  COMPOSE_FILES+=("docker-compose.yml")
+fi
+
+COMPOSE_FILES_PREFIXED=()
+for file in "${COMPOSE_FILES[@]}"; do
+  COMPOSE_FILES_PREFIXED+=("-f" "$file")
+done
+
+${DOCKER_COMPOSE} "${COMPOSE_FILES_PREFIXED[@]}" "$@"
